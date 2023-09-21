@@ -2,7 +2,7 @@
 
 ## Description
 
-My motivation was to create a back-end for an ecommerce site. I built this project because of how prevalent internet retail has become across the globe. This problem solves diorganization when it comes to inventory. I learned how to configure a Express.js API to use Sequelize in order for it to interact with a MySQL databse. 
+My motivation was to create a back-end for an ecommerce site. I built this project because of how prevalent internet retail has become across the globe. This problem solves diorganization when it comes to inventory. I learned how to configure a Express.js API to use Sequelize in order for it to interact with a MySQL database. 
 
 ## Table of Contents (Optional)
 
