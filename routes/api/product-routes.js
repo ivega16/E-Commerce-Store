@@ -2,20 +2,41 @@ const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
-
+//http://localhost:3001/api/products/
 // get all products
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
+  try {
+    const produuctData = await Product.findAll({
+      include: [{ model: Category }, {model: Tag, through: ProductTag}]
+    })
+    res.status(200).json(producctData)
+  }
+  catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 // get one product
-router.get('/:id', (req, res) => {
+//http://localhost:3001/api/products/1
+router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
+  try {
+    const id = req.params.id
+    const productData = await Product.findByPk(id, {
+      include: [{ model: Category },{model: Tag, through: ProductTag}]
+    })
+    res.status(200).json(productData)
+  }
+  catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 // create new product
+//http://localhost:3001/api/products/
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -48,6 +69,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
+//http://localhost:3001/api/products/1
 router.put('/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -91,9 +113,20 @@ router.put('/:id', (req, res) => {
       res.status(400).json(err);
     });
 });
-
-router.delete('/:id', (req, res) => {
+//http://localhost:3001/api/products/1
+router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
+  try {
+    const productData = await Product.destroy({
+      where: {
+        id:req.params.id
+      }
+    })
+    res.status(200).json(productData)
+  }
+  catch (err) {
+    res.status(500).json(err)
+  }
 });
 
 module.exports = router;

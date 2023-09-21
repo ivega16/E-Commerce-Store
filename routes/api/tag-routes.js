@@ -59,6 +59,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+//http://localhost:3001/api/tags/1
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
     // delete a category by its `id` value
